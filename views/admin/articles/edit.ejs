@@ -1,0 +1,40 @@
+<%- include ('../../partials/header.ejs') %>
+  <%- include ('../../partials/navbar.ejs') %>
+
+    <div class="container">
+      <hr>
+      <div class="card">
+        <div class="card-header">
+          <h2>Atualizar artigo</h2>
+        </div>
+        <div class="card-body">
+          <form method="POST" action="/articles/update">
+            <input type="hidden" name="id" value="<%= article.id %>">
+            <input class="form-control" type="text" name="title" id="title" placeholder="Defina o titulo do artigo"
+              value=" <%= article.title %> ">
+            <br>
+            <label>Categoria:</label>
+            <select name="categoryId" id="select" class="form-control">
+              <% categories.forEach(categoria=> { %>
+                <% if (categoria.id==article.categoryId){ %>
+                  <option value="<%= categoria.id %>" selected>
+                    <%= categoria.title %>
+                  </option>
+                  <% } else { %>
+                    <option value="<%= categoria.id %>">
+                      <%= categoria.title %>
+                    </option>
+                    <% } %>
+                <% }) %>
+            </select>
+            <br>
+            <textarea class="form-control" placeholder="Defina o artigo aqui" name="body"
+              id="article"> <%= article.body %> </textarea>
+            <br>
+            <button class="btn btn-success">Atualizar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <%- include ('../../partials/footer.ejs') %>
